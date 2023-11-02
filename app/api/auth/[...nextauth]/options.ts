@@ -26,12 +26,15 @@ export const options: NextAuthOptions = {
                 //TODO Set this up to get real users
                 //Docs: https://next-auth.js.org/configuration/providers/credentials
                 // const user = { ... these are user options like name and password }
+                // use database to save user data. Need to research how to safely store passwords
 
                 // if (credentials?.username === user.name && credentials?.password === user.password) {
                 //     return user;
                 // } else {
                 //     return null;
                 // }
+                const testVar = "hello";
+                console.log(testVar);
                 return null;
             }
         })

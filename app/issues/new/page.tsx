@@ -6,16 +6,18 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createIssueSchema } from "@/app/validationSchemas";
 import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import { useSession } from "next-auth/react";
 
 type IssueForm = z.infer<typeof createIssueSchema>; //generating interface based on schema
 
 const NewIssuePage = () => {
+  const session = useSession();
   const router = useRouter();
   const {
     register,
@@ -27,6 +29,10 @@ const NewIssuePage = () => {
   });
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
 
   const onSubmit = handleSubmit(async (data) => {
     try {
